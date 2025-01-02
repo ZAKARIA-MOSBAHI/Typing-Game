@@ -1,0 +1,189 @@
+* , *::before , *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+  font-family: 'Source Code Pro', monospace;  
+}
+:root{
+  --default-color :#6d6d6d; 
+  --hover-color : #5d5d5d; 
+  --active-color : #4f4f4f; 
+  --disabled-bgcolor : #f6f6f6 ; 
+  --disabled-textcolor : #888888 ; 
+}
+button {
+  color: white !important;
+  background-color: var(--default-color) !important;
+}
+button:hover {
+  background-color: var(--hover-color) !important;
+}
+button:active , button:focus {
+  background-color: var(--active-color) !important;
+}
+/* UTILITIES */
+.disabled {
+  background-color: var(--disabled-bgcolor) !important;
+  color: var(--disabled-textcolor) !important;
+}
+.blur {
+  filter: blur(20px);
+}
+
+body {
+  background-color: #1E1E1E !important;
+}
+.game {
+  height: 100vh;
+  /* filter: blur(10px); */
+}
+.words {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #d3d3d3;
+  border-radius: 9px ;
+  padding: 1rem;
+  font-size: 1.25rem;
+  display: flex;
+  flex-wrap : wrap;
+  font-weight: 600;
+  position: relative;
+}
+
+.word {
+  display: flex;
+  gap: 1px;
+  margin-right: 10px;
+}
+.letter {
+  color: #1E1E1E ;
+transition: .1s ease ;
+}
+.cursor {
+  width: 2px;
+height: 25px;
+background: gray;
+position: absolute ;
+top: 1rem;
+left: 1rem;
+transition: 0.2s ease;
+animation: blinking  1s infinite ;
+}
+
+
+.p  {  
+  font-size: 28px;
+  color: rgba(255,255,255,.70);
+  margin: 0 auto;
+}
+
+/* INPUT STYLING */
+/* From Uiverse.io by WhiteNervosa */ 
+.textInputWrapper {
+  position: relative;
+  width: 100%;
+  margin: 12px 5px;
+  --accent-color: var(--default-color);
+}
+
+.textInputWrapper:before {
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+
+.textInputWrapper:before,
+.textInputWrapper:after {
+  content: "";
+  left: 0;
+  right: 0;
+  position: absolute;
+  pointer-events: none;
+  bottom: -1px;
+  z-index: 4;
+  width: 100%;
+}
+
+.textInputWrapper:focus-within:before {
+  border-bottom: 1px solid var(--accent-color);
+}
+
+.textInputWrapper:before {
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+
+.textInputWrapper:focus-within:before {
+  border-bottom: 1px solid var(--accent-color);
+  transform: scaleX(1);
+}
+
+.textInputWrapper:focus-within:after {
+  border-bottom: 2px solid var(--accent-color);
+  transform: scaleX(1);
+}
+
+.textInputWrapper:after {
+  content: "";
+  transform: scaleX(0);
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  will-change: transform;
+  border-bottom: 2px solid var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+.textInput::placeholder {
+  transition: opacity 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  opacity: 1;
+  user-select: none;
+  color: rgba(255, 255, 255, 0.582);
+}
+
+.textInputWrapper .textInput {
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: 0px 2px 5px rgb(35 35 35 / 30%);
+  max-height: 36px;
+  background-color: #252525;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 200ms;
+  transition-property: background-color;
+  color: #e8e8e8;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 20px 12px;
+  width: 100%;
+  border-left: none;
+  border-bottom: none;
+  border-right: none;
+}
+
+.textInputWrapper .textInput:focus,
+.textInputWrapper .textInput:active {
+  outline: none;
+}
+
+.textInputWrapper:focus-within .textInput,
+.textInputWrapper .textInput:focus,
+.textInputWrapper .textInput:active {
+  background-color: #353535;
+}
+
+.textInputWrapper:focus-within .textInput::placeholder {
+  opacity: 0;
+}
+
+/* INPUT STYLING */
+.char {
+  border-left: 2px solid transparent;
+  transition: .2s ;
+}
+.current {
+  border-left: 2px solid gray ;
+}
+.correct {
+  background:   #4caf4f5f; 
+  color : #4CAF50; 
+}
+.incorrect {
+  color : #F44336; 
+  background-color : #f4433660; 
+}
