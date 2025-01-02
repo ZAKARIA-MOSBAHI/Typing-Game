@@ -27,56 +27,20 @@ button:active , button:focus {
   background-color: var(--disabled-bgcolor) !important;
   color: var(--disabled-textcolor) !important;
 }
-.blur {
-  filter: blur(20px);
-}
+
 
 body {
   background-color: #1E1E1E !important;
 }
-.game {
-  height: 100vh;
-  /* filter: blur(10px); */
-}
+ 
 .words {
-  font-family: 'Courier New', Courier, monospace;
   background-color: #d3d3d3;
   border-radius: 9px ;
   padding: 1rem;
-  font-size: 1.25rem;
-  display: flex;
-  flex-wrap : wrap;
-  font-weight: 600;
-  position: relative;
+  font-size: 1.5rem;
 }
 
-.word {
-  display: flex;
-  gap: 1px;
-  margin-right: 10px;
-}
-.letter {
-  color: #1E1E1E ;
-transition: .1s ease ;
-}
-.cursor {
-  width: 2px;
-height: 25px;
-background: gray;
-position: absolute ;
-top: 1rem;
-left: 1rem;
-transition: 0.2s ease;
-animation: blinking  1s infinite ;
-}
-
-
-.p  {  
-  font-size: 28px;
-  color: rgba(255,255,255,.70);
-  margin: 0 auto;
-}
-
+ 
 /* INPUT STYLING */
 /* From Uiverse.io by WhiteNervosa */ 
 .textInputWrapper {
@@ -173,6 +137,7 @@ animation: blinking  1s infinite ;
 
 /* INPUT STYLING */
 .char {
+  color:  var(--default-color);
   border-left: 2px solid transparent;
   transition: .2s ;
 }

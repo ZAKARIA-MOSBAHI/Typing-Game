@@ -56,10 +56,7 @@ export default function GamePlay({ localTimer }) {
             return (
               <span
                 key={index}
-                className={`char ${
-                  /*if the char is " " we'll add a padding so the words will be spaced between*/
-                  char === " " ? "px-1" : ""
-                } ${
+                className={`char  ${
                   /*if the index equals the index set in the state it means that this letter is the one to be typed */
                   letterIndex === index ? "current" : ""
                 } ${
