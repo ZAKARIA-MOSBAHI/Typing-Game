@@ -1,0 +1,30 @@
+.timePicker {
+    // width: 100%;
+}
+.time {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0 ;
+}
+
+.timeButton {
+    color: #3c3c3c !important;
+    background: transparent !important;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding-inline: 1rem;
+    transition: .5s ;
+    &:hover{
+        color: #f0f0f0 !important;
+    }
+}
+.timeButton.active {
+        color: #f0f0f0 !important;
+    }
+
+.timePicker .time li:not(:last-child) button {
+    border-right: 2px solid #3c3c3c;
+
+}

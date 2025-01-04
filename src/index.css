@@ -12,7 +12,7 @@
   --disabled-bgcolor : #f6f6f6 ; 
   --disabled-textcolor : #888888 ; 
 }
-button {
+/* button {
   color: white !important;
   background-color: var(--default-color) !important;
 }
@@ -21,7 +21,7 @@ button:hover {
 }
 button:active , button:focus {
   background-color: var(--active-color) !important;
-}
+} */
 /* UTILITIES */
 .disabled {
   background-color: var(--disabled-bgcolor) !important;
@@ -142,7 +142,7 @@ body {
   transition: .2s ;
 }
 .current {
-  border-left: 2px solid gray ;
+  border-left: 2px solid #3c3c3c ;
 }
 .correct {
   background:   #4caf4f5f; 

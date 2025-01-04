@@ -6,18 +6,18 @@ import {
   setGameState,
   setLanguage,
 } from "../redux/Slices/gameSlice";
-import { scoreSelector } from "../redux/Selectors/scoreSelector";
+import { scoreBoardSelector } from "../redux/Selectors/scoreBoardSelector";
 import {
   setBoard,
   setCharacters,
   setMistakes,
   setWPM,
-} from "../redux/Slices/scoreSlice";
+} from "../redux/Slices/scoreBoardSlice";
 import { setCurrentCharIndex, setWordsList } from "../redux/Slices/wordsSlice";
 
 export default function GameEnd({ mainTimer }) {
   const dispatch = useDispatch();
-  const { board, mistakes, wpm, characters } = useSelector(scoreSelector);
+  const { board, mistakes, wpm, characters } = useSelector(scoreBoardSelector);
 
   const calculateWPM = (characters, timer) => {
     return Math.round(characters / 5 / (timer / 60));
@@ -30,7 +30,7 @@ export default function GameEnd({ mainTimer }) {
     dispatch(setWPM(wpm));
   }, []);
 
-  // setting the score to 0 , to start a new game
+  // setting the scoreBoard to 0 , to start a new game
   const playAgain = () => {
     dispatch(setGameState("gameStart"));
     dispatch(setWordsList([]));
