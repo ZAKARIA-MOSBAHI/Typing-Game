@@ -1,7 +1,7 @@
 //error to be solved : it returns an error if the word is one letter like ("a")
 import React, { useEffect, useRef } from "react";
-import ActivityTracker from "../ActivityTracker";
-
+// import ActivityTracker from "../ActivityTracker";
+import { motion } from "framer-motion";
 export default function TypingTest({
   startTimer,
   localTimer,
@@ -92,33 +92,40 @@ export default function TypingTest({
       typedCharacters: prevState.typedCharacters + 1,
     }));
   };
-
   return (
     <>
-      <div className="game w-75 d-flex flex-column  gap-2 mx-auto">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{ duration: 0.5 }}
+        className="game w-75 d-flex flex-column  gap-2 mx-auto"
+      >
         <div className="words">
-          {wordsList.map((char, index) => {
-            return (
-              <span
-                key={index}
-                className={`char  ${
-                  /*if the index equals the index set in the state it means that this letter is the one to be typed */
-                  charIndex === index ? "current" : ""
-                } ${
-                  /* if the score is not set for the letter , we don't add any class
+          {wordsList.length !== 0 &&
+            wordsList.map((char, index) => {
+              return (
+                <span
+                  key={index}
+                  className={`char  ${
+                    /*if the index equals the index set in the state it means that this letter is the one to be typed */
+                    charIndex === index ? "current" : ""
+                  } ${
+                    /* if the score is not set for the letter , we don't add any class
                    if it's set to "correct" we add the class "correct"
                    if it's set to "incorrect" we add the class "incorrect" */
-                  charIs[index] === undefined ? "" : charIs[index]
-                }`}
-                ref={(spanElem) => {
-                  /*since the element that have the ref attribute automatically can be passed as an arg for the callback */
-                  lettersRef.current[index] = spanElem;
-                }}
-              >
-                {char}
-              </span>
-            );
-          })}
+                    charIs[index] === undefined ? "" : charIs[index]
+                  }`}
+                  ref={(spanElem) => {
+                    /*since the element that have the ref attribute automatically can be passed as an arg for the callback */
+                    lettersRef.current[index] = spanElem;
+                  }}
+                >
+                  {char}
+                </span>
+              );
+            })}
         </div>
         {/*INPUT DIV*/}
         <div className="user-input w-50 mx-auto ">
@@ -134,9 +141,7 @@ export default function TypingTest({
             />
           </div>
         </div>
-        {/*OPTIONS DIV*/}
-        <div className="options d-flex mx-auto"></div>
-      </div>
+      </motion.div>
     </>
   );
 }

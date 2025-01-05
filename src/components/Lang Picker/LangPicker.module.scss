@@ -6,26 +6,30 @@
     background: transparent ;
     width: auto !important;
     background-image: none;
+    display: flex;
+    align-items: center;
     transition:  .3s ;
     cursor: pointer;
-    &:hover {
-       .langLabel  {
-        color : #f0f0f0 !important; 
-       } 
-           .langIcon {
-            background-color: white;
-           }
-    }
+        &:hover {
+            .langLabel {
+                color: #f0f0f0 !important;
+            }
+            .langIcon {
+                fill: #f0f0f0;
+            }
+        }
 }
+
+
 .langLabel {
-color: #3c3c3c !important;
-transition: .5s ;
+    color: #3c3c3c !important;
+    transition: .5s ;
 }
 .langIcon {
     width: 20px;
     margin-inline: 1rem;
     border-radius: 50px;
-transition: .5s;
+    transition: .5s;
 }
 .langOptions {
     background-color: #1e1e1e !important;

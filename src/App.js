@@ -3,9 +3,10 @@ import styles from "./App.module.scss";
 import TypingTest from "./components/Typing Test/TypingTest";
 import TimePicker from "./components/Time Picker/TimePicker";
 import LangPicker from "./components/Lang Picker/LangPicker";
-import Timer from "./components/Timer";
+import Timer from "./components/Timer/Timer";
 import Results from "./components/Results/Results";
 import { faker, fakerFR } from "@faker-js/faker";
+import Reload from "./components/Options/Reload";
 
 /*add : user activity tracker , capsLock tracker... */
 function App() {
@@ -37,6 +38,20 @@ function App() {
     }
     return randomWordsList;
   };
+  // func that resets everything for a new game
+  const newGame = () => {
+    setLocalTimer(15);
+    setScoreBoard({
+      typedCharacters: 0,
+      accuracy: 0,
+      mistakes: 0,
+      wpm: 0,
+    });
+    setCharIs([]);
+    setCharIndex(0);
+    setWordsList(generateWords(language));
+  };
+
   // since we'll have issues if we add a timer and the scoreBoard changing fastly in the store , we'll make a local timer
   const [localTimer, setLocalTimer] = useState(15);
 
@@ -78,16 +93,9 @@ function App() {
         charIndex={charIndex}
         setCharIndex={setCharIndex}
       />
+      <Reload newGame={newGame} />
       {localTimer === 0 && (
-        <Results
-          setLocalTimer={setLocalTimer}
-          setScoreBoard={setScoreBoard}
-          setCharIs={setCharIs}
-          scoreBoard={scoreBoard}
-          setCharIndex={setCharIndex}
-          setWordsList={setWordsList}
-          generateWords={generateWords}
-        />
+        <Results scoreBoard={scoreBoard} newGame={newGame} />
       )}
     </div>
   );
