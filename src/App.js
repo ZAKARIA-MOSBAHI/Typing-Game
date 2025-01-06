@@ -15,9 +15,21 @@ function App() {
     typedCharacters: 0,
     accuracy: 0,
     mistakes: 0,
+    correctCharacters: 0,
     wpm: 0,
     score: [],
   });
+  // fnc that calculate the wpm
+  const calculateWpm = (time) => {
+    const wpm = Math.round(scoreBoard.typedCharacters / 5 / (time / 60));
+    return wpm;
+  };
+  const calculateAccuracy = () => {
+    const accuracy = Math.round(
+      (scoreBoard.correctCharacters / scoreBoard.typedCharacters) * 100
+    );
+    return accuracy;
+  };
   // charIs is used to store the values "correct" or "incorrect" for each char and it's index
   const [charIs, setCharIs] = useState([]);
   // wordsList will contain the characters that'll be later displayed for the user to type
@@ -54,6 +66,8 @@ function App() {
 
   // since we'll have issues if we add a timer and the scoreBoard changing fastly in the store , we'll make a local timer
   const [localTimer, setLocalTimer] = useState(15);
+  // we will need it to store the value that is set by the user
+  const localTimerRef = useRef(15);
 
   const localTimerInterval = useRef(null);
   const startTimer = () => {
@@ -66,6 +80,13 @@ function App() {
     if (localTimer === 0) {
       //stop the timer
       clearInterval(localTimerInterval.current);
+      setScoreBoard((prevBoard) => {
+        return {
+          ...prevBoard,
+          wpm: calculateWpm(localTimerRef.current),
+          accuracy: calculateAccuracy(),
+        };
+      });
     }
   }, [localTimer]);
 
@@ -79,7 +100,11 @@ function App() {
       <div className={` ${styles.controls}`}>
         <LangPicker Language={language} setLanguage={setLanguage} />
         <Timer localTimer={localTimer} />
-        <TimePicker localTimer={localTimer} setLocalTimer={setLocalTimer} />
+        <TimePicker
+          localTimerRef={localTimerRef}
+          localTimer={localTimer}
+          setLocalTimer={setLocalTimer}
+        />
       </div>
       <TypingTest
         startTimer={startTimer}

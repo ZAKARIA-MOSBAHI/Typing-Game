@@ -25,7 +25,9 @@ export default function TypingTest({
   const lettersRef = useRef([]);
 
   const InputElem = useRef();
-
+  useEffect(() => {
+    InputElem.current.focus();
+  });
   useEffect(() => {
     if (localTimer === 0) {
       //disable the input so the user will not type
@@ -66,14 +68,15 @@ export default function TypingTest({
       return;
     }
     if (letterExpected.textContent === value) {
-      // scoreBoardRef.current[charIndex] = "correct";
-
       setCharIs((prevState) => {
         const updatedChar = [...prevState];
         updatedChar[charIndex] = "correct";
         return updatedChar;
       });
-
+      setScoreBoard((prevState) => ({
+        ...prevState,
+        correctCharacters: prevState.correctCharacters + 1,
+      }));
       setCharIndex((prevChar) => prevChar + 1);
     } else {
       setCharIs((prevState) => {
