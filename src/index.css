@@ -12,6 +12,9 @@
   --disabled-bgcolor : #f6f6f6 ; 
   --disabled-textcolor : #888888 ; 
 }
+.blur {
+  filter: blur(40px);
+}
 /* button {
   color: white !important;
   background-color: var(--default-color) !important;

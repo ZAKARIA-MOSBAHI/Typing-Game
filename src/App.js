@@ -7,9 +7,12 @@ import Timer from "./components/Timer/Timer";
 import Results from "./components/Results/Results";
 import { faker, fakerFR } from "@faker-js/faker";
 import Reload from "./components/Options/Reload";
+import ActivityTracker from "./components/ActivityTracker/ActivityTracker";
 
 /*add : user activity tracker , capsLock tracker... */
 function App() {
+  // getting the app so we can add blur to it
+  // const appRef = useRef();
   // we added all the states here ,to reset them all at once when replaying
   const [scoreBoard, setScoreBoard] = useState({
     typedCharacters: 0,
@@ -17,7 +20,6 @@ function App() {
     mistakes: 0,
     correctCharacters: 0,
     wpm: 0,
-    score: [],
   });
   // fnc that calculate the wpm
   const calculateWpm = (time) => {
@@ -57,6 +59,7 @@ function App() {
       typedCharacters: 0,
       accuracy: 0,
       mistakes: 0,
+      correctCharacters: 0,
       wpm: 0,
     });
     setCharIs([]);
@@ -97,6 +100,7 @@ function App() {
     <div
       className={`App d-flex flex-column justify-content-center align-items-center ${styles.App}`}
     >
+      <ActivityTracker />
       <div className={` ${styles.controls}`}>
         <LangPicker Language={language} setLanguage={setLanguage} />
         <Timer localTimer={localTimer} />

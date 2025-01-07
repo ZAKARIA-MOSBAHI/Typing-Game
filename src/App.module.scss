@@ -1,6 +1,9 @@
 .App{
     position: relative;
 }
+.blur {
+    filter: blur(40px);
+}
 .controls {
     background-color: #646464;
     padding: 1.5rem;

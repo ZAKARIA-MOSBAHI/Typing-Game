@@ -7,11 +7,12 @@ export default function Results({ scoreBoard, newGame }) {
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 1 }}
-        animate={{ opacity: 1, transition: { duration: 3 } }}
-        exit={{ opacity: 0, transition: { duration: 3 } }}
-        className={` ${styles.ResultsContainer} `}
+        transition={{ duration: 3 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={styles.ResultsContainer}
       >
-        <div className={` ${styles.Results} `}>
+        <div className={styles.Results}>
           <h1 className="text-start  w-100 ">Results :</h1>
           <CountUpAnimation
             targetValue={scoreBoard.typedCharacters}
@@ -36,12 +37,15 @@ export default function Results({ scoreBoard, newGame }) {
             textAfter="% Accuracy !"
             delay={3.5}
           />
-          <button
-            className={`btn btn-secondary ${styles.newGameBtn} `}
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, scale: [0, 1.3, 1] }}
+            transition={{ delay: 4.5, duration: 1 }}
+            className={styles.newGameBtn}
             onClick={newGame}
           >
             New Game
-          </button>
+          </motion.button>
         </div>
       </motion.div>
     </AnimatePresence>
