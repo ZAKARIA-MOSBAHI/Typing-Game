@@ -1,0 +1,7 @@
+.timeOptions li:not(:last-child) {
+    border-right: 2px solid 
+    ;
+}
+div.dark .timeOptions li:not(:last-child) {
+    border-right: 2px solid #e0e0e0;
+}
