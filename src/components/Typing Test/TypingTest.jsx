@@ -2,21 +2,24 @@ import { useContext, useEffect, useRef } from "react";
 import "./InputStyle.css";
 import { ThemeContext } from "../../context/ThemeContext";
 import { motion } from "framer-motion";
+import { GameContext } from "../../context/GameContext";
 export default function TypingTest({
-  setFinishedWords,
-  Language,
   CorrectCharsRef,
   typedCharactersRef,
   mistakesRef,
   startTimer,
-  localTimer,
-  wordsList,
-  charIndex,
-  setCharIndex,
-  charIs,
-  setCharIs,
 }) {
   const { mode } = useContext(ThemeContext);
+  const {
+    setFinishedWords,
+    language,
+    localTimer,
+    wordsList,
+    charIndex,
+    setCharIndex,
+    charIs,
+    setCharIs,
+  } = useContext(GameContext);
   const letterVariants = {
     hidden: { opacity: 0 },
     visible: (i) => ({
@@ -50,7 +53,7 @@ export default function TypingTest({
     if (InputElem.current) {
       InputElem.current.value = "";
     }
-  }, [Language]);
+  }, [language]);
   useEffect(() => {
     if (localTimer === 0) {
       InputElem.current.value = "";
@@ -117,80 +120,75 @@ export default function TypingTest({
   };
 
   return (
-    <>
-      <div className="sm:w-[75%] w-full flex flex-col items-center justify-center  gap-2 sm:mx-auto">
+    <div className="sm:w-[75%] w-full flex flex-col items-center justify-center  gap-2 sm:mx-auto">
+      <div ref={ParentContainerRef} className="h-[100px] overflow-hidden my-12">
         <div
-          ref={ParentContainerRef}
-          className="h-[100px] overflow-hidden my-12"
+          ref={containerRef}
+          className="px-4 transition-all duration-500 relative w-full text-lg sm:text-xl md:text-2xl  lg:text-[32px]  font-medium tracking-wider  text-[#808080] dark:text-[#444444] rounded-xl select-none"
         >
-          <div
-            ref={containerRef}
-            className="px-4 transition-all duration-500 relative w-full text-lg sm:text-xl md:text-2xl  lg:text-[32px]  font-medium tracking-wider  text-[#808080] dark:text-[#444444] rounded-xl select-none"
-          >
-            {wordsList.length !== 0 &&
-              wordsList.map((char, index) => {
-                return (
-                  <motion.span
-                    variants={letterVariants}
-                    initial="hidden"
-                    animate="visible"
-                    custom={index}
-                    key={index}
-                    className={`char  ${
-                      /*if the index equals the index set in the state it means that this letter is the one to be typed */
-                      charIndex === index
-                        ? mode === "light"
-                          ? "current_dark"
-                          : "current"
-                        : ""
-                    } ${
-                      /* if the score is not set for the letter , we don't add any class
+          {wordsList.length !== 0 &&
+            wordsList.map((char, index) => {
+              return (
+                <motion.span
+                  variants={letterVariants}
+                  initial="hidden"
+                  animate="visible"
+                  custom={index}
+                  key={index}
+                  className={`char  ${
+                    /*if the index equals the index set in the state it means that this letter is the one to be typed */
+                    charIndex === index
+                      ? mode === "light"
+                        ? "current_dark"
+                        : "current"
+                      : ""
+                  } ${
+                    /* if the score is not set for the letter , we don't add any class
                    if it's set to "correct" we add the class "correct"
                    if it's set to "incorrect" we add the class "incorrect" */
-                      charIs[index] === undefined ? "" : charIs[index]
-                    }`}
-                    ref={(spanElem) => {
-                      /*since the element that have the ref attribute automatically can be passed as an arg for the callback */
-                      lettersRef.current[index] = spanElem;
-                    }}
-                  >
-                    {char}
-                  </motion.span>
-                );
-              })}
-          </div>
-        </div>
-
-        {/*INPUT DIV*/}
-        <div className="w-1/2 mx-auto ">
-          {mode === "dark" && (
-            <div className="textInputWrapper ">
-              <input
-                type="text"
-                className="textInput"
-                ref={InputElem}
-                onKeyDown={(e) => {
-                  handleChange(e);
-                }}
-                data-testid="user_input"
-              />
-            </div>
-          )}
-          {mode === "light" && (
-            <div className="textInputWrapper_1 ">
-              <input
-                type="text"
-                className="textInput_1"
-                ref={InputElem}
-                onKeyDown={(e) => {
-                  handleChange(e);
-                }}
-                data-testid="user_input"
-              />
-            </div>
-          )}
+                    charIs[index] === undefined ? "" : charIs[index]
+                  }`}
+                  ref={(spanElem) => {
+                    /*since the element that have the ref attribute automatically can be passed as an arg for the callback */
+                    lettersRef.current[index] = spanElem;
+                  }}
+                >
+                  {char}
+                </motion.span>
+              );
+            })}
         </div>
       </div>
-    </>
+
+      {/*INPUT DIV*/}
+      <div className="w-1/2 mx-auto ">
+        {mode === "dark" && (
+          <div className="textInputWrapper ">
+            <input
+              type="text"
+              className="textInput"
+              ref={InputElem}
+              onKeyDown={(e) => {
+                handleChange(e);
+              }}
+              data-testid="user_input"
+            />
+          </div>
+        )}
+        {mode === "light" && (
+          <div className="textInputWrapper_1 ">
+            <input
+              type="text"
+              className="textInput_1"
+              ref={InputElem}
+              onKeyDown={(e) => {
+                handleChange(e);
+              }}
+              data-testid="user_input"
+            />
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

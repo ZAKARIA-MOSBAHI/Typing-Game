@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { GameContext } from "../../context/GameContext";
-import { FR, US } from "country-flag-icons/react/3x2";
+import { FR, US, DE } from "country-flag-icons/react/3x2";
 import Popover, { PopoverContent, PopoverTrigger } from "../ui/Popover";
 
 export default function LangPicker() {
@@ -8,6 +8,7 @@ export default function LangPicker() {
   const LanguageOptions = [
     { name: "English", image: US },
     { name: "French", image: FR },
+    { name: "German", image: DE },
   ];
   return (
     <Popover className="h-full flex items-center">
@@ -24,13 +25,13 @@ export default function LangPicker() {
         )}
       </PopoverTrigger>
       <PopoverContent
-        className={`w-40 flex divide-y flex-col h-fit my-2 transition-all duration-300 cursor-pointer`}
+        className={`w-fit flex divide-y flex-col h-fit my-2 transition-all duration-300 cursor-pointer`}
       >
         {LanguageOptions.map((lang, index) => {
           return (
             <button // how can i give this button the ability to close the popover
               key={index}
-              className="flex gap-2 justify-center py-2 hover:text-[#1E1E1E] dark:hover:text-[#eeeeee]  "
+              className="flex gap-2 px-8 justify-center py-2 hover:text-[#1E1E1E] dark:hover:text-[#eeeeee]  "
               onClick={() => {
                 setLanguage(lang.name);
               }}

@@ -12,9 +12,9 @@ function ThemeChanger() {
     }
   };
   return mode === "light" ? (
-    <Moon size={24} onClick={changeTheme} className="cursor-pointer" />
+    <Moon onClick={changeTheme} className="w-6 cursor-pointer" />
   ) : (
-    <Sun size={24} onClick={changeTheme} className="cursor-pointer" />
+    <Sun onClick={changeTheme} className=" w-6 cursor-pointer" />
   );
 }
 

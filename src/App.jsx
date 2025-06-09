@@ -10,6 +10,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { generateWords } from "./utils/generateWords";
 import { calculateWpm } from "./utils/calculateWpm";
 import { GameContext } from "./context/GameContext";
+import NavActions from "./components/NavActions/NavActions";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const {
@@ -108,30 +110,12 @@ function App() {
             transition={{ duration: 1 }}
             className="flex flex-col items-center"
           >
-            <div
-              className={`dark:bg-[#646464] bg-[#E0E0E0] my-4 rounded-lg max-w-[900px] w-full h-12 flex items-center justify-evenly    `}
-            >
-              <LangPicker />
-              <Timer localTimer={localTimer} />
-              <TimePicker
-                localTimerRef={localTimerRef}
-                setLocalTimer={setLocalTimer}
-              />
-              <ThemeChanger />
-            </div>
+            <Navbar localTimerRef={localTimerRef} />
             <TypingTest
-              setFinishedWords={setFinishedWords}
               CorrectCharsRef={CorrectCharsRef}
               typedCharactersRef={typedCharactersRef}
               mistakesRef={mistakesRef}
               startTimer={startTimer}
-              Language={language}
-              localTimer={localTimer}
-              setCharIs={setCharIs}
-              charIs={charIs}
-              wordsList={wordsList}
-              charIndex={charIndex}
-              setCharIndex={setCharIndex}
             />
             <Reload newGame={newGame} />
           </motion.div>

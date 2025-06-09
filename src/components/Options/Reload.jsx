@@ -1,4 +1,4 @@
-import ReloadIcon from "./ReloadIcon";
+import { RefreshCcw } from "lucide-react";
 
 export default function Reload({ newGame }) {
   return (
@@ -7,7 +7,9 @@ export default function Reload({ newGame }) {
         className={`group mx-4 border-0 bg-transparent cursor-pointer `}
         onClick={newGame}
       >
-        <ReloadIcon />
+        <RefreshCcw
+          className={`size-8 transition-all duration-500 hover:text-[#1E1E1E] dark:hover:text-[#eeeeee] dark:text-[#3C3C3C] text-[#808080]`}
+        />
         <span
           className={`group-hover:top-[-110%] group-hover:z-[5] group-hover:opacity-100 opacity-0 absolute p-2 dark:text-[#1e1e1e] dark:bg-gray-200 
             bg-[#1E1E1E] text-[#eeeeee] rounded-lg top-[-100%] left-[50%] whitespace-nowrap 

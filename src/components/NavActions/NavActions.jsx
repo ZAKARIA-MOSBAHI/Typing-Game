@@ -1,17 +1,19 @@
 import LangPicker from "../Lang Picker/LangPicker";
 import ThemeChanger from "../ThemeChanger/ThemeChanger";
 import TimePicker from "../Time Picker/TimePicker";
-import Timer from "../Timer/Timer";
+import { motion } from "framer-motion";
 
-export default function NavActions() {
+export default function NavActions({ localTimerRef }) {
   return (
-    <div
-      className={`dark:bg-[#646464] bg-[#E0E0E0] p-6 my-4 rounded-lg max-w-[900px] w-full h-8 flex items-center justify-evenly    `}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.8, duration: 0.3 }}
+      className={`flex gap-4 items-center justify-center h-full`}
     >
-      <LangPicker Language={language} setLanguage={setLanguage} />
-      <Timer localTimer={localTimer} />
-      <TimePicker localTimerRef={localTimerRef} setLocalTimer={setLocalTimer} />
+      <LangPicker />
+      <TimePicker localTimerRef={localTimerRef} />
       <ThemeChanger />
-    </div>
+    </motion.div>
   );
 }

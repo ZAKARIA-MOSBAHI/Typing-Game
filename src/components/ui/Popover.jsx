@@ -14,7 +14,6 @@ const PopoverContext = createContext();
 export default function Popover({ children, className }) {
   const [open, setOpen] = useState(false);
   const closePopover = () => setOpen(false);
-  useEffect(() => console.log("open is :  ", open), [open]);
   const value = useMemo(
     () => ({ open, setOpen, closePopover }),
     [open, setOpen]
@@ -32,10 +31,10 @@ export function PopoverTrigger({ className, children }) {
     throw new Error("Popover components must be used within a Popover");
   }
   const { open, setOpen } = context;
-
+  useEffect(() => console.log("is open ?", open), [open]);
   return (
     <button
-      onClick={() => setOpen(!open)}
+      onClick={() => setOpen((prev) => !prev)}
       className={cn("relative h-fit", className)}
     >
       {children}
@@ -70,20 +69,20 @@ export function PopoverContent({ className, children }) {
           exit={{ opacity: 0, scale: 0 }}
           transition={{ duration: 0.2, ease: "easeIn" }}
           className={cn(
-            "absolute top-full left-0 origin-top  rounded-md z-50  dark:bg-[#646464] ",
+            "absolute top-full left-0 origin-top  rounded-md z-50 bg-[#E0E0E0] dark:bg-[#646464] ",
             className
           )}
         >
           {React.Children.map(children, (child) => {
-            // Inject closePopover only into <button> elements
-            if (React.isValidElement(child) && child.type === "button") {
+            if (
+              React.isValidElement(child) &&
+              typeof child.type === "string" && // ensures it's a DOM element
+              child.type === "button"
+            ) {
               return React.cloneElement(child, {
-                closePopover,
                 onClick: (e) => {
-                  // Call child's original onClick first if any
-                  child.props.onClick?.(e);
-                  // Then close popover
-                  closePopover();
+                  child.props.onClick?.(e); // Call original onClick if exists
+                  closePopover(); // Then close popover
                 },
               });
             }
