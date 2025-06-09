@@ -1,43 +1,46 @@
-import { useState } from "react";
-import LangIcon from "./LangIcon";
+import React, { useContext, useState } from "react";
+import { GameContext } from "../../context/GameContext";
+import { FR, US } from "country-flag-icons/react/3x2";
+import Popover, { PopoverContent, PopoverTrigger } from "../ui/Popover";
 
-export default function LangPicker({ Language, setLanguage }) {
-  const LanguageOptions = ["English", "French"];
-  const [openDropdown, setOpenDropdown] = useState(false);
+export default function LangPicker() {
+  const { language, setLanguage } = useContext(GameContext);
+  const LanguageOptions = [
+    { name: "English", image: US },
+    { name: "French", image: FR },
+  ];
   return (
-    <div className="relative">
-      <button
-        className={`group border-0 whitespace-nowrap border-b border-[#808080] pb-2 bg-transparent w-auto bg-none flex items-center transition-all duration-300 cursor-pointer  dark:text-[#1E1E1E] text-[#808080]  `}
-        type="button"
-        onClick={() => setOpenDropdown(!openDropdown)}
+    <Popover className="h-full flex items-center">
+      <PopoverTrigger
+        className={`group relative cursor-pointer items-center justify-center`}
       >
-        <span
-          className={`mr-4  transition-all duration-300 dark:group-hover:text-[#eeeeee] group-hover:text-[#1E1E1E]`}
-        >
-          {Language}
-        </span>
-        <LangIcon />
-      </button>
-      <div
-        className={`${
-          openDropdown ? "flex" : "hidden"
-        } bg-[#E0E0E0] dark:bg-[#646464] dark:text-[#1E1E1E] flex-col items-center justify-center rounded-sm  w-full absolute top-[150%] right-0 text-[#808080]`}
+        {LanguageOptions.map((l) =>
+          l.name === language
+            ? React.createElement(l.image, {
+                key: l.name,
+                className: "w-6",
+              })
+            : null
+        )}
+      </PopoverTrigger>
+      <PopoverContent
+        className={`w-40 flex divide-y flex-col h-fit my-2 transition-all duration-300 cursor-pointer`}
       >
         {LanguageOptions.map((lang, index) => {
           return (
-            <button
+            <button // how can i give this button the ability to close the popover
               key={index}
-              className={`w-full py-2 hover:text-[#1E1E1E] dark:hover:text-[#eeeeee]  transition-all duration-300 cursor-pointer border-b border-[#1E1E1E]`}
+              className="flex gap-2 justify-center py-2 hover:text-[#1E1E1E] dark:hover:text-[#eeeeee]  "
               onClick={() => {
-                setOpenDropdown(false);
-                setLanguage(lang);
+                setLanguage(lang.name);
               }}
             >
-              {lang}
+              <lang.image className="w-4" />
+              {lang.name}
             </button>
           );
         })}
-      </div>
-    </div>
+      </PopoverContent>
+    </Popover>
   );
 }

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
 import "./InputStyle.css";
-import { GameContext } from "../../context/GameContext";
+import { ThemeContext } from "../../context/ThemeContext";
 import { motion } from "framer-motion";
 export default function TypingTest({
   setFinishedWords,
@@ -16,7 +16,7 @@ export default function TypingTest({
   charIs,
   setCharIs,
 }) {
-  const { mode } = useContext(GameContext);
+  const { mode } = useContext(ThemeContext);
   const letterVariants = {
     hidden: { opacity: 0 },
     visible: (i) => ({

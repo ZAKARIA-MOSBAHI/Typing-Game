@@ -4,52 +4,31 @@ import TimePicker from "./components/Time Picker/TimePicker";
 import LangPicker from "./components/Lang Picker/LangPicker";
 import Timer from "./components/Timer/Timer";
 import Results from "./components/Results/Results";
-import { faker, fakerFR } from "@faker-js/faker";
 import Reload from "./components/Options/Reload";
 import ThemeChanger from "./components/ThemeChanger/ThemeChanger";
-import { GameContext } from "./context/GameContext";
 import { AnimatePresence, motion } from "framer-motion";
+import { generateWords } from "./utils/generateWords";
+import { calculateWpm } from "./utils/calculateWpm";
+import { GameContext } from "./context/GameContext";
 
 function App() {
-  const { mode } = useContext(GameContext);
-  const [finishedWords, setFinishedWords] = useState(false);
+  const {
+    finishedWords,
+    setFinishedWords,
+    scoreBoard,
+    setScoreBoard,
+    charIs,
+    setCharIs,
+    wordsList,
+    setWordsList,
+    charIndex,
+    setCharIndex,
+    language,
+
+    localTimer,
+    setLocalTimer,
+  } = useContext(GameContext);
   const localTimerInterval = useRef(null);
-
-  // we added all the states here ,to reset them all at once when replaying
-  const [scoreBoard, setScoreBoard] = useState([]);
-  // fnc that calculate the wpm
-  const calculateWpm = (time, Chars) => {
-    const timeInMinutes = time / 60;
-    const words = Chars / 5;
-    if (timeInMinutes > 0) {
-      const wpm = Math.round(words / timeInMinutes);
-      return wpm;
-    } else return 0;
-  };
-
-  // charIs is used to store the values "correct" or "incorrect" for each char and it's index
-  const [charIs, setCharIs] = useState([]);
-  // wordsList will contain the characters that'll be later displayed for the user to type
-  const [wordsList, setWordsList] = useState([]);
-  // charIndex used to track every character in the wordsList
-  const [charIndex, setCharIndex] = useState(0);
-  // language used to determine the wordsList language
-  const [language, setLanguage] = useState("English");
-  // function that generate random words
-  const generateWords = (Lang) => {
-    let randomWordsList;
-    switch (Lang) {
-      case "French":
-        randomWordsList = fakerFR.word.words(40).split("");
-        break;
-      default:
-        randomWordsList = faker.word.words(40).split("");
-    }
-    return randomWordsList;
-  };
-
-  // since we'll have issues if we add a timer and the scoreBoard changing fastly in the store , we'll make a local timer
-  const [localTimer, setLocalTimer] = useState(15);
   // we will need it to store the value that is set by the user
   const localTimerRef = useRef(15);
   const timeRef = useRef(0);
@@ -118,7 +97,7 @@ function App() {
 
   return (
     <div
-      className={` ${mode} transition-colors duration-200  relative bg-[#F5F5F5] dark:bg-[#111111] h-screen w-full `}
+      className={`transition-colors duration-200  relative bg-[#F5F5F5] dark:bg-[#111111] h-screen w-full `}
     >
       <AnimatePresence>
         {localTimer !== 0 && (
@@ -130,9 +109,9 @@ function App() {
             className="flex flex-col items-center"
           >
             <div
-              className={`dark:bg-[#646464] bg-[#E0E0E0] p-6 my-4 rounded-lg max-w-[900px] w-full h-8 flex items-center justify-evenly    `}
+              className={`dark:bg-[#646464] bg-[#E0E0E0] my-4 rounded-lg max-w-[900px] w-full h-12 flex items-center justify-evenly    `}
             >
-              <LangPicker Language={language} setLanguage={setLanguage} />
+              <LangPicker />
               <Timer localTimer={localTimer} />
               <TimePicker
                 localTimerRef={localTimerRef}

@@ -1,3 +1,4 @@
+@config "../tailwind.config.js";
 @import "tailwindcss";
 @variant dark (&:where(.dark, .dark *));
 
@@ -5,13 +6,13 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: 'Source Code Pro', monospace;
+  font-family: "Source Code Pro", monospace;
 }
 
 .char {
   color: var(--default-color);
   border-left: 2px solid transparent;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .current {
@@ -21,13 +22,12 @@
   border-left: 2px solid #1e1e1e;
 }
 
-
 .correct {
   background: #4caf4f5f;
-  color: #4CAF50;
+  color: #4caf50;
 }
 
 .incorrect {
-  color: #F44336;
+  color: #f44336;
   background-color: #f4433660;
 }

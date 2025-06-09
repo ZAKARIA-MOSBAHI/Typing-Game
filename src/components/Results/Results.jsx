@@ -10,6 +10,9 @@ import {
 import { Line } from "react-chartjs-2";
 import ControlPannel from "./components/ControlPannel";
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { GameContext } from "../../context/GameContext";
+import { calculateAvgAccuracy } from "../../utils/calculateAvgAccuracy";
 
 ChartJS.register(
   LineElement,
@@ -20,17 +23,10 @@ ChartJS.register(
   Legend
 );
 
-export default function Results({ scoreBoard, newGame }) {
+export default function Results({ newGame }) {
+  const { scoreBoard } = useContext(GameContext);
   const isDark = document.documentElement.classList.contains("dark");
-  const calculateAvgAccuracy = (scoreBoard) => {
-    const sumOfCorrectChars = scoreBoard.reduce(
-      (sum, s) => sum + s.correctChars,
-      0
-    );
-    const typedChars = scoreBoard[scoreBoard.length - 1].typedChars;
 
-    return Math.round((sumOfCorrectChars / typedChars) * 100);
-  };
   const data = {
     labels: scoreBoard.map((item) => item.time),
     datasets: [
