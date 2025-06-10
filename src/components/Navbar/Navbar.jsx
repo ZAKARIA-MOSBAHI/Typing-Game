@@ -1,6 +1,7 @@
 import NavActions from "../NavActions/NavActions";
 import Timer from "../Timer/Timer";
 import { motion } from "framer-motion";
+import Logo from "../ui/Logo";
 export default function Navbar({ localTimerRef }) {
   return (
     <motion.div
@@ -13,6 +14,7 @@ export default function Navbar({ localTimerRef }) {
       }}
       className={`dark:bg-[#646464] bg-[#E0E0E0] my-4 rounded-lg max-w-[900px] w-full h-12 flex items-center justify-evenly    `}
     >
+      <Logo />
       <Timer />
       <NavActions localTimerRef={localTimerRef} />
     </motion.div>

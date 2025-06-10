@@ -12,6 +12,7 @@ import { calculateWpm } from "./utils/calculateWpm";
 import { GameContext } from "./context/GameContext";
 import NavActions from "./components/NavActions/NavActions";
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const {
@@ -124,6 +125,7 @@ function App() {
       {localTimer === 0 && (
         <Results scoreBoard={scoreBoard} newGame={newGame} />
       )}
+      <Footer />
     </div>
   );
 }

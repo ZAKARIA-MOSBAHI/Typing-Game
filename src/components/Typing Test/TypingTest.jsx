@@ -120,7 +120,7 @@ export default function TypingTest({
   };
 
   return (
-    <div className="sm:w-[75%] w-full flex flex-col items-center justify-center  gap-2 sm:mx-auto">
+    <div className="max-w-[850px] w-full flex flex-col items-center justify-center px-4 sm:px-0  gap-2 sm:mx-auto">
       <div ref={ParentContainerRef} className="h-[100px] overflow-hidden my-12">
         <div
           ref={containerRef}
